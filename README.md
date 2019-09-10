@@ -4,20 +4,9 @@ Online Pizza Shop Web Application
 ## Installation 
 Because of docker-compose most of the installation process will be automated. We will only need to add a few configurations first.
 
-This **does not** use a proxy to serve backend and frontend on the same ports.
-And for that we must configure the link of the backend API in the frontend. You can do this in:
+This uses a proxy to serve backend and frontend on the same port 80.
 
-`/frontend/src/Config.ts`
-```typescript
-export const config: {
-    ApiUrl: string;
-} = {
-    ApiUrl: "http://localhost:3000/api/" // Just add the url here
-};
-```
-Note, that the backend api will be exposed via nginx as webserver on port `3000` and the root of the api is `/api/` so be sure to include these in the url.
-
-Now once it is configured, you can launch the containers by running:
+You can launch the containers by running in the root directory:
 ```bash
 docker-compose up --build
 ```
