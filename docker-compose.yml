@@ -35,12 +35,12 @@ services:
     networks:
       - app-network
 
-  webserver:
+  backendserver:
     build:
-      context: ./webserver
+      context: ./backendserver
       dockerfile: Dockerfile
-    image: pizza-shop:webserver
-    container_name: webserver
+    image: pizza-shop:backendserver
+    container_name: backendserver
     ports:
       - "3000:3000"
     depends_on:
@@ -59,9 +59,26 @@ services:
     image: pizza-shop:frontend
     container_name: frontend
     depends_on:
-      - webserver
+      - backendserver
+    ports:
+      - "4200:4200"
+    networks:
+      - app-network
+      
+  webserver:
+    build:
+      context: ./webserver
+      dockerfile: Dockerfile
+    image: pizza-shop:webserver
+    container_name: webserver
+    links:
+      - backendserver
+      - frontend
     ports:
       - "80:80"
+    depends_on:
+      - backendserver
+      - frontend
     networks:
       - app-network
 

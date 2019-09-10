@@ -17,7 +17,7 @@ RUN npm run build
 
 FROM nginx:1.15
 # Expose the port the app runs in
-EXPOSE 80
+EXPOSE 4200
 COPY --from=build-stage /usr/src/app/build/ /usr/share/nginx/html
 COPY /nginx-frontend.conf /etc/nginx/conf.d/default.conf
 
