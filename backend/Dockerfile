@@ -6,9 +6,13 @@ RUN apt-get update && apt-get install -y \
     default-mysql-client \
     curl \
 	git \
-    nginx
+    zip \
+    unzip \
+    zlib1g-dev \
+    libzip-dev
 
-RUN docker-php-ext-install pdo_mysql mbstring
+RUN docker-php-ext-configure zip --with-libzip
+RUN docker-php-ext-install pdo_mysql mbstring zip 
 # Create a directory where our app will be placed
 RUN mkdir -p /var/www/html/
 
