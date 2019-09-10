@@ -22,8 +22,11 @@ class CreateOrdersTable extends Migration
             $table->float('sub_total_cost');
             $table->float('tax');
             $table->float('total_cost');
+            $table->unsignedBigInteger('billing_address_id');
+            $table->foreign('billing_address_id')->references('id')->on('addresses');
+            $table->unsignedBigInteger('delivery_address_id');
+            $table->foreign('delivery_address_id')->references('id')->on('addresses');
             $table->enum('status', ['placed', 'completed', 'cancelled']);
-            $table->string('address');
             $table->timestamps();
         });
     }
