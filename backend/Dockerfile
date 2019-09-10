@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     default-mysql-client \
     curl \
+	git \
     nginx
 
 RUN docker-php-ext-install pdo_mysql mbstring
