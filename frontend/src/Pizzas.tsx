@@ -4,11 +4,13 @@ import Card from "react-bootstrap/Card";
 import CardColumns from "react-bootstrap/CardColumns";
 import Api from "./Api";
 import {Redirect} from "react-router-dom";
+import {isLoggedIn} from "./AuthStatus";
 
 export default class Pizzas extends React.Component {
     state = {
         pizzas: [],
-        selectedPizza: 0
+        selectedPizza: 0,
+        isLoggedIn: isLoggedIn(),
     }
 
     async componentDidMount() {
@@ -27,6 +29,12 @@ export default class Pizzas extends React.Component {
         if (this.state.selectedPizza > 0) {
             const path = `/order/place/${this.state.selectedPizza}`;
             return <Redirect to={path}/>;
+        }
+        const search = (this.props as { location: any }).location.search;
+        const searchValues = new URLSearchParams(search);
+        console.log((searchValues.get('isLoggedIn')));
+        if (searchValues.get('isLoggedIn')) {
+            window.location.href = window.location.pathname;
         }
         return (
             <CardColumns>

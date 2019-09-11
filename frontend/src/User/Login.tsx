@@ -5,7 +5,6 @@ import Api from "../Api";
 import {isLoggedIn} from "../AuthStatus";
 import {Redirect} from 'react-router-dom';
 import Alert from "react-bootstrap/Alert";
-import * as queryString from "querystring";
 
 export default class Login extends React.Component {
     state = {
@@ -45,7 +44,7 @@ export default class Login extends React.Component {
 
     render() {
         if (this.state.isLoggedIn || this.state.redirect) {
-            return (<Redirect to="/"/>);
+            return (<Redirect to="/?isLoggedIn=1"/>);
         }
         let ErrorAlert = () => <div/>;
         if (this.state.error.length > 0) {

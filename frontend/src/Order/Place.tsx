@@ -81,7 +81,7 @@ export default class PlaceOrder extends React.Component<RouteProps & matchProps>
             const deliveryAddress = deliveryAddressResponse.data;
             orderData.delivery_address_id = deliveryAddress.id;
         }
-        const orderResponse = await Api.post(`order/add`, orderData, {headers: {'Authorization': `Bearer ${getToken()}`}});
+        await Api.post(`order/add`, orderData, {headers: {'Authorization': `Bearer ${getToken()}`}});
         this.setState({orderPlaced: true});
     };
 
